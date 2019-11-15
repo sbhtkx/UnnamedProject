@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">My Audio Player</string>
+    <string name="library_tab">Library</string>
+    <string name="playlists_tab">Playlists</string>
+
+    <string name="hello_library_fragment">Hello library fragment</string>
+    <string name="hello_playlists_fragment">Hello playlists fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="now_playing_tab">Now Playing</string>
+</resources>
