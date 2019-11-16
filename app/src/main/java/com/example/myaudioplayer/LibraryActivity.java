@@ -25,14 +25,29 @@ public class LibraryActivity extends AppCompatActivity {
 
 
         viewPager = findViewById(R.id.viewPager);
+        libraryPagerAdapter = new LibraryPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(libraryPagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        libraryPagerAdapter = new LibraryPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        addTab("position: " + 0, -1);
+
+
 
     }
 
-    private void addTab(){
-        tabLayout.addTab(tabLayout.newTab().setText("hello :)"));
-//        libraryPagerAdapter
+
+    public void addTab(String path, int currentPosition){
+        if(tabLayout != null && libraryPagerAdapter != null && viewPager != null) {
+            // remove all tabs right to currentPosition
+            while (tabLayout.getTabCount() > currentPosition + 1) {
+                tabLayout.removeTabAt(tabLayout.getTabCount() - 1);
+            }
+
+            tabLayout.addTab(tabLayout.newTab().setText(path));
+            MyFragment fragment = MyFragment.newInstance(path, currentPosition + 1);
+            libraryPagerAdapter.addFragment(fragment, currentPosition);
+            viewPager.setCurrentItem(libraryPagerAdapter.getCount() - 1);
+        }
     }
 
 }
