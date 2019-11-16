@@ -37,7 +37,6 @@ public class LibraryActivity extends AppCompatActivity {
 
 
     public void addTab(String path, int currentPosition){
-        if(tabLayout != null && libraryPagerAdapter != null && viewPager != null) {
             // remove all tabs right to currentPosition
             while (tabLayout.getTabCount() > currentPosition + 1) {
                 tabLayout.removeTabAt(tabLayout.getTabCount() - 1);
@@ -47,7 +46,6 @@ public class LibraryActivity extends AppCompatActivity {
             MyFragment fragment = MyFragment.newInstance(path, currentPosition + 1);
             libraryPagerAdapter.addFragment(fragment, currentPosition);
             viewPager.setCurrentItem(libraryPagerAdapter.getCount() - 1);
-        }
     }
 
 }
