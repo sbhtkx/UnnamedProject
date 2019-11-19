@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class MyFragment extends Fragment {
+public class LibrarySongsFragment extends Fragment {
 
     private static final String ARG_PATH = "argPath", ARG_POSITION = "argPosition";
 
@@ -19,11 +19,11 @@ public class MyFragment extends Fragment {
     private int position;
 
 
-    static MyFragment newInstance(String path, int position){
-        MyFragment fragment = new MyFragment();
+    static LibrarySongsFragment newInstance(String path, int currentPosition){
+        LibrarySongsFragment fragment = new LibrarySongsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PATH, path);
-        args.putInt(ARG_POSITION, position);
+        args.putInt(ARG_POSITION, currentPosition + 1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -33,7 +33,7 @@ public class MyFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.example_fragment, container, false);
+        View v = inflater.inflate(R.layout.fragment_library_songs, container, false);
         TextView textView = v.findViewById(R.id.text_view_fragment);
         Button button = v.findViewById(R.id.fragment_button);
 
@@ -49,7 +49,9 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(getActivity() != null) {
-                    ((LibraryActivity) getActivity()).addTab("position: " + (position + 1), position);
+                    String newPath = path + position;
+                    LibrarySongsFragment fragment = LibrarySongsFragment.newInstance(newPath, position);
+                    ((LibraryActivity) getActivity()).addTab(fragment,newPath, position);
                 }
             }
         });

@@ -30,7 +30,7 @@ class LibraryPagerAdapter extends FragmentStatePagerAdapter {
 
     void addFragment(Fragment fragment, int currentPosition){
         // remove all fragments right to currentPosition
-//TODO        fragmentList = fragmentList.subList(currentPosition + 1, fragmentList.size());
+        fragmentList = fragmentList.subList(0, currentPosition + 1);
         fragmentList.add(fragment);
         notifyDataSetChanged();
     }

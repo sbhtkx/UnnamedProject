@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 public class LibraryActivity extends AppCompatActivity {
@@ -29,21 +30,27 @@ public class LibraryActivity extends AppCompatActivity {
         viewPager.setAdapter(libraryPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        addTab("position: " + 0, -1);
+        addFirstTab();
 
 
 
     }
 
+    private void addFirstTab() {
 
-    public void addTab(String path, int currentPosition){
+        tabLayout.addTab(tabLayout.newTab().setText("choose"));
+        libraryPagerAdapter.addFragment(LibraryChoicesFragment.newInstance(), -1);
+        viewPager.setCurrentItem(libraryPagerAdapter.getCount() - 1);
+    }
+
+
+    public void addTab(Fragment fragment, String title, int currentPosition){
             // remove all tabs right to currentPosition
             while (tabLayout.getTabCount() > currentPosition + 1) {
                 tabLayout.removeTabAt(tabLayout.getTabCount() - 1);
             }
 
-            tabLayout.addTab(tabLayout.newTab().setText(path));
-            MyFragment fragment = MyFragment.newInstance(path, currentPosition + 1);
+            tabLayout.addTab(tabLayout.newTab().setText(title));
             libraryPagerAdapter.addFragment(fragment, currentPosition);
             viewPager.setCurrentItem(libraryPagerAdapter.getCount() - 1);
     }
